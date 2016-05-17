@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
- 
+
+
+
 <head>
     <title>one billion dollars</title>
  
@@ -9,8 +11,23 @@
  
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
  
-    <script src="../static/js/jquery-1.11.2.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery-2.2.3.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery.flexibleArea.js') }}"></script>
+    <script type="text/javascript"> 
+        $(function() {
+            $("textarea").flexible();
+        });
+    </script>
     <style>
+
+        textarea {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            display: inline-block;
+            min-width: 616px;
+        }
+
         .btn-file {
             position: relative;
             overflow: hidden;
@@ -48,12 +65,10 @@
 
 
         <!-- Textarea -->
-    <form action="" method=post>
-        <dl>
-                    <dt>Post:
-                        <dd>{{form.body(cols = "35")}}
-                        </dl>
+    <form action="" method=post id="billionform">
+        {{ form.body}}
     </form>
+
  
         <footer class="footer">
             <p>&copy; aeiou 2015</p>
@@ -61,4 +76,4 @@
  
     </div>
 </body>
-</html>
+</html> 

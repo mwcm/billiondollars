@@ -4,18 +4,17 @@ from wtforms import Form, TextField, TextAreaField
 app = Flask(__name__)
 app.debug = True
 
+billiontxt = open("./static/billion.txt").read()
 
 class BillionForm(Form):
-	body  = TextAreaField(u'Text')
-
-number = 100000
-numbers = [number] * 10000
+	body  = TextAreaField(default = billiontxt)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-	form = BillionForm(request.form)
+	form = BillionForm(request.form, "AEIOAEIOAEIOEAI")
 	return render_template("index.html",
-						form = form)
+						form = form,
+						name = "aeiou")
 
 
 if __name__ == '__main__' :
