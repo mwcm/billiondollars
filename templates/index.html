@@ -9,7 +9,7 @@
  
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
  
-    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet" media="screen">
  
     <script type="text/javascript" src="{{ url_for('static', filename='jquery-2.2.3.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='jquery.flexibleArea.js') }}"></script>
@@ -77,8 +77,10 @@
         </div>
 
 
+
         <!-- Textarea -->
-    <form action="" method=post id="billionform">
+    <form action="/" method="post" id="billionform">  
+    <input class="btn btn-default" type="submit" name="lambo" value="lambo">
         {{ form.body}}
     </form>
 
