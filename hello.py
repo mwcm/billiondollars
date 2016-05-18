@@ -13,7 +13,7 @@ class BillionForm(Form):
 	body  = TextAreaField(default = billiontxt)
 
 @app.route('/', methods=['GET', 'POST'])
-def index():
+def index(billiontxt):
 	if request.method == 'POST':
 		n = 0
 		for n in range(0,3):
