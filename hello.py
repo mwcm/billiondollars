@@ -28,7 +28,7 @@ def test_message(message):
 	emit('aeiou',{'data': 'got it!'})
 	print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def index():
 
 	# if request.method == 'POST':
@@ -47,7 +47,6 @@ def index():
 	# 						form = form,
 	# 						name = "aeiou")
 
-	if request.method == 'GET' or request.method == 'POST':
 		form = BillionForm(request.form, "AEIOAEIOAEIOEAI")
 		return render_template("index.html",
 							form = form,
