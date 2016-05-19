@@ -29,10 +29,6 @@
                 socket.emit('my event', {data: $('#emit_data').val()});
                 return false;
             });
-            $('form#broadcast').submit(function(event) {
-                socket.emit('my broadcast event', {data: $('#broadcast_data').val()});
-                return false;
-            });
         });
     </script>
 
@@ -52,7 +48,7 @@
 
 
         <!-- Textarea -->
-    <form action="/" method="post" id="billionform">  
+    <form action="/lambo" method="post" id="billionform">  
     <input class="btn btn-default" type="submit" value="lambo">
         {{ form.body}}
     </form>
