@@ -2,13 +2,18 @@ from flask import Flask, request, render_template
 from flask.ext.socketio import SocketIO, emit
 from wtforms import Form, TextField, TextAreaField
 from random import randint
+from gevent import monkey
 
 #http://blog.miguelgrinberg.com/post/easy-websockets-with-flask-and-gevent
 #http://www.shanelynn.ie/asynchronous-updates-to-a-webpage-with-flask-and-socket-io/
 
+
+monkey.patch_all()
+
 app = Flask(__name__)
 app.debug = True
-socketio = SocketIO(app)
+socketio = SocketIO(app, async_mode='gevent')
+
 
 spent = []
 
@@ -21,6 +26,7 @@ class BillionForm(Form):
 @socketio.on('my event')
 def test_message(message):
 	emit('aeiou',{'data': 'got it!'})
+	print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -48,4 +54,4 @@ def index():
 							name = "aeiou")
 
 if __name__ == '__main__' :
-	socketio.run(app)
+	socketio.run(app, debug = True)
