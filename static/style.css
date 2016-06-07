@@ -11,12 +11,21 @@
 }
 
 textarea {
+    font-size: 32pt
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     display: inline-block;
+    color: transparent;
     min-width: 616px;
-    background-color: #F0F0F0;
+    background-color: transparent;
+    border: none;
+    overflow: auto;
+    outline: none;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 .btn-file {
