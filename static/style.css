@@ -1,5 +1,6 @@
 .container {
     width: 100%;
+    max-width: 100%
 }
 
 .header {
@@ -10,17 +11,24 @@
     width: 100%;
 }
 
+form{
+    height:100%;
+}
+
 textarea {
-    font-size: 32pt
+    min-height: 100%;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    overflow: auto;
+    padding:0px;
+    font-size: 75px;
+    color: #000000;
     display: inline-block;
-    color: transparent;
-    min-width: 616px;
+    width: 100%;
+    max-width: 100%;
     background-color: transparent;
     border: none;
-    overflow: auto;
     outline: none;
 
     -webkit-box-shadow: none;
