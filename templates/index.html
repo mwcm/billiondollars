@@ -43,10 +43,11 @@
                 </ul>
             </nav>
             <h3 class="text-muted">one billion dollars</h3>
+            Total : {{total}}
         </div>
 
-    <form action="/lambo" method="post" id="billionform">  
-    <input class="btn btn-default" type="submit" value="lambo">
+    <form action="/spend" method="post" id="billionform">  
+    <input class="btn btn-default" type="submit" value="spend">
         {{ form.body(readonly=true)}}
     </form>
 

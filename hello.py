@@ -33,21 +33,26 @@ def test_message(message):
 
 @app.route('/')
 def index():
-		form = BillionForm(request.form, "AEIOAEIOAEIOEAI")
+		form = BillionForm(request.form)
+		t = total()
 		return render_template("index.html",
 							form = form,
-							name = "aeiou")
+							name = "aeiou",
+							total = t)
 
 
 
-@app.route('/lambo',methods=['POST'])
-def lambo():
+@app.route('/spend',methods=['POST'])
+def spend():
+		print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 		form = BillionForm()
 		form.body = get_money()
-		return render_template('index.html', form = form)
+		t = total()
+		return render_template('index.html', form = form, total = t)
 
 
 def get_money():
+	print("AAAAAAAAAAA")
 	n = 0
 	for n in range(0,3):
 			r = randint(0,10000)
@@ -56,6 +61,18 @@ def get_money():
 				spent.append(r)
 				n = n +1;
 	return newtxt
+
+
+def total():
+	old = 10000
+	if len(spent) < 10000:
+		for i in spent:
+			old = old - 1;
+
+		return old * 100000
+		
+	else:
+		return 0;
 
 
 if __name__ == '__main__' :
