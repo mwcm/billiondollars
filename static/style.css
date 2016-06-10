@@ -17,13 +17,14 @@ form{
 
 
 textarea#body{
+    text-align: center;
     min-height: 100%;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     overflow: auto;
     padding:0px;
-    font-size: 75px;
+    font-size: 4.3vw;
     color: #000000;
     display: inline-block;
     width: 100%;
