@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from flask.ext.socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit
 from wtforms import Form, TextField, TextAreaField
 from random import randint
 from gevent import monkey
@@ -25,12 +25,6 @@ class BillionForm(Form):
 	body  = TextAreaField(default = billiontxt)
 
 
-@socketio.on('my event')
-def test_message(message):
-	emit('aeiou',{'data': 'got it!'})
-	#print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-	
-
 @app.route('/')
 def index():
 		form = BillionForm(request.form)
@@ -40,19 +34,13 @@ def index():
 							name = "aeiou",
 							total = t)
 
-
-
-@app.route('/spend',methods=['POST'])
-def spend():
-		print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-		form = BillionForm()
-		form.body = get_money()
-		t = total()
-		return render_template('index.html', form = form, total = t)
-
+@socketio.on('spend')
+def test_message(message):
+	m = get_money()
+	t = total()
+	socketio.emit('spent', {'total':t,'money':m})
 
 def get_money():
-	print("AAAAAAAAAAA")
 	n = 0
 	for n in range(0,3):
 			r = randint(0,10000)
