@@ -65,7 +65,7 @@ def get_money():
 			spent.append(r)
 			n = n +1;
 
-		return newtxt
+	return newtxt
 
 
 def total():
