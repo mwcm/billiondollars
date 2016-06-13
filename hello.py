@@ -22,7 +22,7 @@ spent = []
 billiontxt = open("./static/billion.txt").read()
 
 class BillionForm(Form):
-	body  = TextAreaField(default = billiontxt)
+	moneyarea  = TextAreaField(default = billiontxt)
 
 
 @app.route('/')
@@ -42,13 +42,17 @@ def test_message(message):
 
 def get_money():
 	n = 0
-	for n in range(0,3):
-			r = randint(0,10000)
-			if r not in spent:
-				newtxt = billiontxt.replace("100,000","       ", r)
-				spent.append(r)
-				n = n +1;
-	return newtxt
+	newtxt = billiontxt
+	while n <= 3:
+		r = randint(0,10000)
+		if r not in spent:
+			#newtxt = newtxt.replace("100,000","       ", r)
+			newtxt = "1"
+			print("\n THIS IS UPDATED TEXT: "+newtxt+"\n")
+			spent.append(r)
+			n = n +1;
+
+		return newtxt
 
 
 def total():

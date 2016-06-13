@@ -27,7 +27,9 @@
                 total = msg.total;
                 money = msg.money
 
-                $('#billionform.body').html(money)
+                console.log("AAAAAAAAAAAAAAAAAAAAAAAAA"+money)
+
+                $('#moneyarea').html(money)
                 $('#total').html(total)
             });
             $('form#billionform').submit(function(event) {
@@ -54,7 +56,7 @@
 
     <form action="/spend" method="post" id="billionform">  
     <input class="btn btn-default" type="submit" value="spend">
-        {{ form.body(readonly=true)}}
+        {{ form.moneyarea(readonly=true)}}
     </form>
 
  
