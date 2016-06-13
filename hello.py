@@ -40,15 +40,28 @@ def test_message(message):
 	t = total()
 	socketio.emit('spent', {'total':t,'money':m})
 
+def nth_replace(s, sub, repl, nth):
+    find = s.find(sub)
+    # if find is not p1 we have found at least one match for the substring
+    i = find != -1
+    # loop util we find the nth or we find no match
+    while find != -1 and i != nth:
+        # find + 1 means we start at the last match start index + 1
+        find = s.find(sub, find + 1)
+        i += 1
+    # if i  is equal to nth we found nth matches so replace
+    if i == nth:
+        return s[:find]+repl+s[find + len(sub):]
+    return s
+
 def get_money():
 	n = 0
 	newtxt = billiontxt
 	while n <= 3:
-		r = randint(0,10000)
+		r = randint(1,10000)
 		if r not in spent:
-			#newtxt = newtxt.replace("100,000","       ", r)
-			newtxt = "1"
-			print("\n THIS IS UPDATED TEXT: "+newtxt+"\n")
+			newtxt =  nth_replace(newtxt, "100,000","             ",r)
+			print("\n THIS IS UPDATED NUMBER: "+str(r)+"\n")
 			spent.append(r)
 			n = n +1;
 
