@@ -60,10 +60,16 @@ def get_money():
 	while n <= 3:
 		r = randint(1,10000)
 		if r not in spent:
-			newtxt =  nth_replace(newtxt, "100,000","             ",r)
-			print("\n THIS IS UPDATED NUMBER: "+str(r)+"\n")
-			spent.append(r)
-			n = n +1;
+			if r % 5 == 0:
+				newtxt =  nth_replace(newtxt, "100,000","           a                ",r)
+				print("\n THIS IS UPDATED NUMBER: "+str(r)+"\n")
+				spent.append(r)
+				n = n +1;
+			else:
+				newtxt =  nth_replace(newtxt, "100,000","             ",r)
+				print("\n THIS IS UPDATED NUMBER: "+str(r)+"\n")
+				spent.append(r)
+				n = n +1;
 
 	return newtxt
 
