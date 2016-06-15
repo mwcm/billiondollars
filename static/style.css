@@ -16,7 +16,27 @@ form{
 }
 
 
+
+
+.tb {
+    border-collapse:collapse
+}
+
+
+.tb td{
+    border: none;
+    outline: none;
+}
+
+tr, td, table, tbody{
+    border: none;
+    outline: none;
+    border-color: transparent;
+    outline-color: transparent;
+}
+
 #tablehere{
+    border-style: hidden;
     text-align: center;
     min-height: 100%;
     -webkit-box-sizing: border-box;

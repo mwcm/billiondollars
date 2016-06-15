@@ -13,10 +13,10 @@ with open(infile, newline='\n', encoding='utf-8-sig') as f:
 	content = content.replace('\\t','').replace('\\n','').replace('\\r','').replace('\'','').replace(',','').replace('100','100,').strip('[]')
 
 	count = 1
-	for item in content.split('</td>'):
+	for item in re.split('</td>',content):
 		if '<td>' in item:
 			item = item.replace('<td>','<td id ='+str(count)+'>')
-			out.write(item)
+			out.write(item+"</td>")
 			count = count + 1
 
 
