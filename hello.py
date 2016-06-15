@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template
 from flask_socketio import SocketIO, emit
-from wtforms import Form, TextField, TextAreaField
+from wtforms import Form, SubmitField
 from random import randint
 from gevent import monkey
 
@@ -19,59 +19,42 @@ socketio = SocketIO(app, async_mode='gevent')
 
 spent = []
 
-billiontxt = open("./static/billion.txt").read()
+table = open("./static/table.html").read()
 
 class BillionForm(Form):
-	moneyarea  = TextAreaField(default = billiontxt)
+	btn = SubmitField()
 
 
 @app.route('/')
 def index():
 		form = BillionForm(request.form)
 		t = total()
+		#socketio.emit('init',{'table':table})
 		return render_template("index.html",
 							form = form,
 							name = "aeiou",
-							total = t)
+							total = t,
+							ta = table)
 
 @socketio.on('spend')
 def test_message(message):
-	m = get_money()
+
+	s = get_spent()
 	t = total()
-	socketio.emit('spent', {'total':t,'money':m})
+	socketio.emit('done', {'total':t,'spent':s})
 
-def nth_replace(s, sub, repl, nth):
-    find = s.find(sub)
-    # if find is not p1 we have found at least one match for the substring
-    i = find != -1
-    # loop util we find the nth or we find no match
-    while find != -1 and i != nth:
-        # find + 1 means we start at the last match start index + 1
-        find = s.find(sub, find + 1)
-        i += 1
-    # if i  is equal to nth we found nth matches so replace
-    if i == nth:
-        return s[:find]+repl+s[find + len(sub):]
-    return s
-
-def get_money():
+def get_spent():
 	n = 0
-	newtxt = billiontxt
+	tohide = []
 	while n <= 3:
 		r = randint(1,10000)
 		if r not in spent:
-			if r % 5 == 0:
-				newtxt =  nth_replace(newtxt, "100,000","           a                ",r)
-				print("\n THIS IS UPDATED NUMBER: "+str(r)+"\n")
-				spent.append(r)
-				n = n +1;
-			else:
-				newtxt =  nth_replace(newtxt, "100,000","             ",r)
-				print("\n THIS IS UPDATED NUMBER: "+str(r)+"\n")
-				spent.append(r)
-				n = n +1;
+			print("\n THIS IS UPDATED NUMBER: "+str(r)+"\n")
+			spent.append(r)
+			tohide.append(r)
+			n = n +1;
 
-	return newtxt
+	return tohide
 
 
 def total():

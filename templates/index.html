@@ -12,24 +12,25 @@
     <link rel="stylesheet"href="static/style.css"> 
     <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='jquery-2.2.3.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='jquery.flexibleArea.js') }}"></script> 
-    <script type="text/javascript"> 
-        $(function() {
-            $("textarea").flexible();
-        });
-    </script>  
 
     <script>
         $(document).ready(function(){
             var socket = io.connect('http://' + document.domain + ':' + location.port);
-            socket.on('spent', function(msg) {
+
+            socket.on('done', function(msg) {
 
                 total = msg.total;
-                money = msg.money
+                spent = msg.spent
 
-                $('#moneyarea').html(money)
+
                 $('#total').html(total)
+
+                $.each(spent, function(index, value){
+                    $('#'+value).hide();
+                }) 
             });
+
+
             $('form#billionform').submit(function(event) {
                 socket.emit('spend', {data: $('#emit_data').val()});
                 return false;
@@ -48,14 +49,16 @@
                 </ul>
             </nav>
             <h3 class="text-muted">one billion dollars</h3>
-
             Total : <div id="total">{{total}} </div>
         </div>
 
     <form action="/spend" method="post" id="billionform">  
+    <div id="tablehere">
+        {{ta|safe}}
+    </div>
     <input class="btn btn-default" type="submit" value="spend">
-        {{ form.moneyarea(readonly=true)}}
-    </form>
+
+     </form>
 
  
         <footer class="footer">
