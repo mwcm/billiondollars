@@ -35,6 +35,11 @@ tr, td, table, tbody{
     outline-color: transparent;
 }
 
+#spacer {
+
+    min-height: 200px;
+}
+
 #tablehere{
     border-style: hidden;
     text-align: center;
