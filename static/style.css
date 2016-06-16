@@ -29,7 +29,7 @@ form{
 }
 
 tr, td, table, tbody{
-    border: none;
+    border: none !important; 
     outline: none;
     border-color: transparent;
     outline-color: transparent;
