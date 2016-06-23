@@ -40,6 +40,11 @@ tr, td, table, tbody{
     min-height: 200px;
 }
 
+h4{
+    padding-top:40px;
+    padding-bottom:30px;
+}
+
 #tablehere{
     border-style: hidden;
     text-align: center;
