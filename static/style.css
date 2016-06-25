@@ -1,31 +1,11 @@
-.container {
-    width: 100%;
-    max-width: 100%
-}
-
-.header {
-    width: 100%;
-}
-
-#nav {
-    width: 100%;
-}
-
 form{
     height:100%;
 }
 
 
-
-
-.tb {
-    border-collapse:collapse
-}
-
-
-.tb td{
-    border: none;
-    outline: none;
+h4{
+    padding-top:40px;
+    padding-bottom:30px;
 }
 
 tr, td, table, tbody{
@@ -35,14 +15,23 @@ tr, td, table, tbody{
     outline-color: transparent;
 }
 
+.container {
+    width: 100%;
+    max-width: 100%
+}
+
+.header {
+    width: 100%;
+}
+
+
+#nav {
+    width: 100%;
+}
+
 #spacer {
 
     min-height: 200px;
-}
-
-h4{
-    padding-top:40px;
-    padding-bottom:30px;
 }
 
 #tablehere{
