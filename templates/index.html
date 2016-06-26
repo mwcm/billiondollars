@@ -19,14 +19,14 @@
 
             socket.on('done', function(msg) {
 
-                total = msg.total;
+                total = "$"+msg.total;
                 spent = msg.spent
 
 
                 $('#total').html(total)
 
                 $.each(spent, function(index, value){
-                    $('#'+value).hide();
+                    $('#'+value).css('visibility','hidden');
                 }) 
             });
 
@@ -49,7 +49,7 @@
                 </ul>
             </nav>
             <h1 class="text-muted">OneBillionDolla.rs</h3>
-            <h4 class="text-muted"> Total : <div id="total">{{total}} </div> </h4>
+            <h4 class="text-muted"> Total : <div id="total">${{total}} </div> </h4>
         </div>
 
     <form action="/spend" method="post" id="billionform">

@@ -24,6 +24,10 @@ tr, td, table, tbody{
     width: 100%;
 }
 
+#total{
+	font-size: 36pt;
+
+}
 
 #nav {
     width: 100%;
