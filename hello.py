@@ -16,58 +16,60 @@ app = Flask(__name__)
 app.debug = True
 socketio = SocketIO(app, async_mode='gevent')
 
-
+purchased_count = 0
 spent = []
 
 table = open("./static/table.html").read()
 
 class BillionForm(Form):
-	btn = SubmitField()
+    btn = SubmitField()
 
 
 @app.route('/')
 def index():
-		form = BillionForm(request.form)
-		t = total()
-		#socketio.emit('init',{'table':table})
-		return render_template("index.html",
-							form = form,
-							name = "aeiou",
-							total = t,
-							ta = table)
+    form = BillionForm(request.form)
+    t = total()
+    #socketio.emit('init',{'table':table})
+    return render_template("index.html",
+                        form = form,
+                        name = "aeiou",
+                        total = t,
+                        ta = table)
 
 @socketio.on('spend')
 def test_message(message):
+    s = get_spent()
+    t = total()
+    p = get_purchased()
+    socketio.emit('done', {'total':t,'spent':s, 'purchased':p})
 
-	s = get_spent()
-	t = total()
-	socketio.emit('done', {'total':t,'spent':s})
+def get_purchased():
+    purchased_count += 1
+    return purchased_count
 
 def get_spent():
-	n = 0
-	tohide = []
-	while n <= 3:
-		r = randint(1,10000)
-		if r not in spent:
-			print("\n THIS IS UPDATED NUMBER: "+str(r)+"\n")
-			spent.append(r)
-			tohide.append(r)
-			n = n +1;
+    n = 0
+    tohide = []
+    while n <= 3:
+        r = randint(1,10000)
+        if r not in spent:
+            print("\n THIS IS UPDATED NUMBER: "+str(r)+"\n")
+            spent.append(r)
+            tohide.append(r)
+            n = n +1;
 
-	return tohide
+    return tohide
 
 
 def total():
-	old = 10000
-	if len(spent) < 10000:
-		for i in spent:
-			old = old - 1;
-
-		return old * 100000
-		
-	else:
-		return 0;
+    old = 10000
+    if len(spent) < 10000:
+       for i in spent:
+           old = old - 1;
+           return old * 100000
+       else:
+           return 0;
 
 
 if __name__ == '__main__' :
-	socketio.run(app, debug = True)
+    socketio.run(app, debug = True)

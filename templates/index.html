@@ -21,10 +21,12 @@
 
                 total = "$"+msg.total;
                 spent = msg.spent
+		purchased = msg.spent
 
 
                 $('#total').html(total)
 
+	        $('#total').html(total)
                 $.each(spent, function(index, value){
                     $('#'+value).css('visibility','hidden');
                 }) 
@@ -50,6 +52,7 @@
             </nav>
             <h1 class="text-muted">OneBillionDolla.rs</h3>
             <h4 class="text-muted"> Total : <div id="total">${{total}} </div> </h4>
+            <h4 class="text-muted"> Lambprghinis bought : <div id="purchased">${{purchased}} </div> </h4>
         </div>
 
     <form action="/spend" method="post" id="billionform">
