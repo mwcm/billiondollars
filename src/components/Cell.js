@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 // https://flaviocopes.com/react-spreadsheet/
 
+
+// removed editing variable, as editing is disabled
 /**
  * Cell represents the atomic element of a table
  */
@@ -10,25 +12,33 @@ export default class Cell extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      editing: false,
+      //editing: false,
       value: props.value,
     }
     this.display = this.determineDisplay(
       { x: props.x, y: props.y },
       props.value
     )
+
+    // TODO: do we need these?
     this.timer = 0
     this.delay = 200
     this.prevent = false
   }
 
+
+  // disabling select + unselect
   /**
    * Add listener to the `unselectAll` event used to broadcast the
    * unselect all event
    */
-  componentDidMount() {
-    window.document.addEventListener('unselectAll',
-      this.handleUnselectAll)
+  //componentDidMount() {
+    //window.document.addEventListener('unselectAll',
+      //this.handleUnselectAll)
+  //}
+
+  componendDidMount() {
+
   }
 
   /**
@@ -42,13 +52,18 @@ export default class Cell extends Component {
       { x: this.props.x, y: this.props.y }, this.state.value)
   }
 
+  // removing select + unselect
   /**
    * Remove the `unselectAll` event listener added in
    * `componentDidMount()`
    */
+  //componentWillUnmount() {
+    //window.document.removeEventListener('unselectAll',
+      //this.handleUnselectAll)
+  //}
+
   componentWillUnmount() {
-    window.document.removeEventListener('unselectAll',
-      this.handleUnselectAll)
+
   }
 
   /**
@@ -61,25 +76,29 @@ export default class Cell extends Component {
       { x: this.props.x, y: this.props.y }, e.target.value)
   }
 
+  // don't want cells to be editable
   /**
    * Handle pressing a key when the Cell is an input element
    */
-  onKeyPressOnInput = (e) => {
-    if (e.key === 'Enter') {
-      this.hasNewValue(e.target.value)
-    }
-  }
+  //onKeyPressOnInput = (e) => {
+    //if (e.key === 'Enter') {
+      //this.hasNewValue(e.target.value)
+    //}
+  //}
 
+  // don't want cells to be editable
   /**
    * Handle pressing a key when the Cell is a span element,
    * not yet in editing mode
    */
-  onKeyPressOnSpan = () => {
-    if (!this.state.editing) {
-      this.setState({ editing: true })
-    }
-  }
+  //onKeyPressOnSpan = () => {
+    //if (!this.state.editing) {
+      //this.setState({ editing: true })
+    //}
+  //}
 
+
+  // TODO: figure out if this fn is needed
   /**
    * Handle moving away from a cell, stores the new value
    */
@@ -87,15 +106,16 @@ export default class Cell extends Component {
     this.hasNewValue(e.target.value)
   }
 
+  // since we aren't selecting, we aren't deselecting either
   /**
    * Used by `componentDid(Un)Mount`, handles the `unselectAll`
    * event response
    */
-  handleUnselectAll = () => {
-    if (this.state.selected || this.state.editing) {
-      this.setState({ selected: false, editing: false })
-    }
-  }
+  //handleUnselectAll = () => {
+    //if (this.state.selected || this.state.editing) {
+      //this.setState({ selected: false, editing: false })
+    //}
+  //}
 
 
   // TODO: need this to update the values?
@@ -125,23 +145,24 @@ export default class Cell extends Component {
     //window.document.dispatchEvent(unselectAllEvent)
   //}
 
+  // don't want to be able to click cells
   /**
    * Handle clicking a Cell.
    */
-  clicked = () => {
-    // Prevent click and double click to conflict
-    this.timer = setTimeout(() => {
-      if (!this.prevent) {
-        // Unselect all the other cells and set the current
-        // Cell state to `selected`
-        this.emitUnselectAllEvent()
-        this.setState({ selected: true })
-      }
-      this.prevent = false
-    }, this.delay)
-  }
+  //clicked = () => {
+    //// Prevent click and double click to conflict
+    //this.timer = setTimeout(() => {
+      //if (!this.prevent) {
+        //// Unselect all the other cells and set the current
+        //// Cell state to `selected`
+        //this.emitUnselectAllEvent()
+        //this.setState({ selected: true })
+      //}
+      //this.prevent = false
+    //}, this.delay)
+  //}
 
-  // don't want to be able to click cells
+  // don't want to be able to double click cells
   /**
    * Handle doubleclicking a Cell.
    */
@@ -156,6 +177,7 @@ export default class Cell extends Component {
     //this.setState({ editing: true, selected: true })
   //}
 
+  // stub to determine value to display, maybe logic here later?
   determineDisplay = ({ x, y }, value) => {
     return value
   }
