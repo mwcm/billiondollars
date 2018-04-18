@@ -97,6 +97,8 @@ export default class Cell extends Component {
     }
   }
 
+
+  // TODO: need this to update the values?
   /**
    * Called by the `onBlur` or `onKeyPressOnInput` event handlers,
    * it escalates the value changed event, and restore the editing
@@ -113,14 +115,15 @@ export default class Cell extends Component {
     this.setState({ editing: false })
   }
 
+  // don't want cells to be selectable
   /**
    * Emits the `unselectAll` event, used to tell all the other
    * cells to unselect
    */
-  emitUnselectAllEvent = () => {
-    const unselectAllEvent = new Event('unselectAll')
-    window.document.dispatchEvent(unselectAllEvent)
-  }
+  //emitUnselectAllEvent = () => {
+    //const unselectAllEvent = new Event('unselectAll')
+    //window.document.dispatchEvent(unselectAllEvent)
+  //}
 
   /**
    * Handle clicking a Cell.
@@ -138,19 +141,20 @@ export default class Cell extends Component {
     }, this.delay)
   }
 
+  // don't want to be able to click cells
   /**
    * Handle doubleclicking a Cell.
    */
-  doubleClicked = () => {
-    // Prevent click and double click to conflict
-    clearTimeout(this.timer)
-    this.prevent = true
+  //doubleClicked = () => {
+    //// Prevent click and double click to conflict
+    //clearTimeout(this.timer)
+    //this.prevent = true
 
-    // Unselect all the other cells and set the current
-    // Cell state to `selected` & `editing`
-    this.emitUnselectAllEvent()
-    this.setState({ editing: true, selected: true })
-  }
+    //// Unselect all the other cells and set the current
+    //// Cell state to `selected` & `editing`
+    //this.emitUnselectAllEvent()
+    //this.setState({ editing: true, selected: true })
+  //}
 
   determineDisplay = ({ x, y }, value) => {
     return value
@@ -178,11 +182,12 @@ export default class Cell extends Component {
       fontFamily: 'Calibri, \'Segoe UI\', Thonburi, Arial, Verdana, sans-serif',
     }
 
-    if (this.props.x === 0 || this.props.y === 0) {
-      css.textAlign = 'center'
-      css.backgroundColor = '#f0f0f0'
-      css.fontWeight = 'bold'
-    }
+    // don't need header row + row indicators
+    //if (this.props.x === 0 || this.props.y === 0) {
+      //css.textAlign = 'center'
+      //css.backgroundColor = '#f0f0f0'
+      //css.fontWeight = 'bold'
+    //}
 
     return css
   }
@@ -190,6 +195,8 @@ export default class Cell extends Component {
   render() {
     const css = this.calculateCss()
 
+    // do not need row number column
+    // TODO: comment this out when finished testing
     // column 0
     if (this.props.x === 0) {
       return (
@@ -199,44 +206,46 @@ export default class Cell extends Component {
       )
     }
 
+    // we don't want this row styled any differently than the rest
     // row 0
-    if (this.props.y === 0) {
-      const alpha = ' abcdefghijklmnopqrstuvwxyz'.split('')
-      return (
-        <span
-          onKeyPress={this.onKeyPressOnSpan}
-          style={css}
-          role="presentation">
-          {alpha[this.props.x]}
-        </span>
-      )
-    }
+    //if (this.props.y === 0) {
+      //const alpha = ' abcdefghijklmnopqrstuvwxyz'.split('')
+      //return (
+        //<span
+          //onKeyPress={this.onKeyPressOnSpan}
+          //style={css}
+          //role="presentation">
+          //{alpha[this.props.x]}
+        //</span>
+      //)
+    //}
 
-    if (this.state.selected) {
-      css.outlineColor = 'lightblue'
-      css.outlineStyle = 'dotted'
-    }
+    // we don't want cells to be selectable by the user
+    //if (this.state.selected) {
+      //css.outlineColor = 'lightblue'
+      //css.outlineStyle = 'dotted'
+    //}
 
-    if (this.state.editing) {
-      return (
-        <input
-          style={css}
-          type="text"
-          onBlur={this.onBlur}
-          onKeyPress={this.onKeyPressOnInput}
-          value={this.state.value}
-          onChange={this.onChange}
-          autoFocus
-        />
-      )
-    }
+    //if (this.state.editing) {
+      //return (
+        //<input
+          //style={css}
+          //type="text"
+          //onBlur={this.onBlur}
+          //onKeyPress={this.onKeyPressOnInput}
+          //value={this.state.value}
+          //onChange={this.onChange}
+          //autoFocus
+        ///>
+      //)
+    //}
     return (
+      // taking out onclicks from cell span
+      // onClick={e => this.clicked(e)}
+      // onDoubleClick={e => this.doubleClicked(e)}
       <span
-        onClick={e => this.clicked(e)}
-        onDoubleClick={e => this.doubleClicked(e)}
         style={css}
-        role="presentation"
-      >
+        role="presentation">
         {this.display}
       </span>
     )
