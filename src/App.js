@@ -15,8 +15,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-          <div style={{width:'max-content'}}>
-            <Table x={4} y={4}/>
+          <div style={{width:'100%'}}>
+            <Table x={4} y={3999} />
           </div>
       </div>
     );

@@ -102,9 +102,9 @@ export default class Cell extends Component {
   /**
    * Handle moving away from a cell, stores the new value
    */
-  onBlur = (e) => {
-    this.hasNewValue(e.target.value)
-  }
+  //onBlur = (e) => {
+    //this.hasNewValue(e.target.value)
+  //}
 
   // since we aren't selecting, we aren't deselecting either
   /**
@@ -187,18 +187,18 @@ export default class Cell extends Component {
    */
   calculateCss = () => {
     const css = {
-      width: '80px',
+      width: '20%',
       padding: '4px',
       margin: '0',
-      height: '25px',
+      height: '50px',
       boxSizing: 'border-box',
       position: 'relative',
       display: 'inline-block',
       color: 'black',
       border: '1px solid #cacaca',
-      textAlign: 'left',
+      textAlign: 'center',
       verticalAlign: 'top',
-      fontSize: '14px',
+      fontSize: '24px',
       lineHeight: '15px',
       overflow: 'hidden',
       fontFamily: 'Calibri, \'Segoe UI\', Thonburi, Arial, Verdana, sans-serif',
@@ -220,13 +220,13 @@ export default class Cell extends Component {
     // do not need row number column
     // TODO: comment this out when finished testing
     // column 0
-    if (this.props.x === 0) {
-      return (
-        <span style={css}>
-          {this.props.y}
-        </span>
-      )
-    }
+    //if (this.props.x === 0) {
+      //return (
+        //<span style={css}>
+          //{this.props.y}
+        //</span>
+      //)
+    //}
 
     // we don't want this row styled any differently than the rest
     // row 0
