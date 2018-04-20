@@ -15,7 +15,7 @@ export default class Table extends React.Component {
     }
   }
 
-  spend = ({x , y}, e) => {
+  spend = (x , y) => (e) => {
     const modifiedData = Object.assign({}, this.state.data)
     if(!modifiedData[y]) return; // don't want to add rows
     modifiedData[y][x] = "" // or add padding?
@@ -52,12 +52,13 @@ export default class Table extends React.Component {
     }
     return (
       <div>
-        <button onClick={(e) => this.spend(e, '{0,0}')}></button>
+        <button onClick={this.spend('0, 0')}> BUTTON </button>
         {rows}
       </div>
     )
   }
 }
+        //<button onClick={(e) => this.spend(e, '{0,0}')}></button>
         //<button onClick={this.spend.bind(this, '{0,0}')}></button>
 
 Table.propTypes = {
