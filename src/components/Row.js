@@ -13,9 +13,10 @@ const Row = (props) => {
         key={'${x}-${y}'}
         y={y}
         x={x}
+        spend={props.spend}
         onChangedValue={props.handleChangedCell}
         updateCells={props.updateCells}
-        value={"50,000"}
+        value={props.rowData[x] || ''}
       />,
     )
   }
@@ -27,10 +28,14 @@ const Row = (props) => {
 }
 
 Row.propTypes = {
+  spend: PropTypes.func.isRequired,
   handleChangedCell : PropTypes.func.isRequired,
   updateCells: PropTypes.func.isRequired,
   x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired
+  y: PropTypes.number.isRequired,
+  rowData: PropTypes.shape({
+    string: PropTypes.string,
+  }).isRequired,
 }
 
 export default Row

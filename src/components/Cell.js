@@ -118,6 +118,14 @@ export default class Cell extends Component {
   //}
 
 
+  spend = () => {
+    this.props.spend({
+      x: this.props.x,
+      y: this.props.y,
+    })
+    this.setState({ editing : false })
+  }
+
   // TODO: need this to update the values?
   /**
    * Called by the `onBlur` or `onKeyPressOnInput` event handlers,
@@ -275,6 +283,7 @@ export default class Cell extends Component {
 }
 
 Cell.propTypes = {
+  spend: PropTypes.func.isRequired,
   onChangedValue: PropTypes.func.isRequired,
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,

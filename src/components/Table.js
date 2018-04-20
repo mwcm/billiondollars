@@ -1,4 +1,3 @@
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import Row from './Row'
@@ -9,9 +8,18 @@ export default class Table extends React.Component {
   constructor(props) {
     super(props)
 
+
+    // TODO: how to load array from file here using react virtualized
     this.state = {
       data: {},
     }
+  }
+
+  spend = ({x , y}) => {
+    const modifiedData = Object.assign({}, this.state.data)
+    if(!modifiedData[y]) return; // don't want to add rows
+    modifiedData[y][x] = "" // or add padding?
+    this.setState({data : modifiedData})
   }
 
   handleChangedCell = ({ x, y }, value) => {
@@ -32,6 +40,7 @@ export default class Table extends React.Component {
       const rowData = this.state.data[y] || {}
       rows.push(
         <Row
+          spend = {this.spend}
           handleChangedCell={this.handleChangedCell}
           updateCells={this.updateCells}
           key={y}
