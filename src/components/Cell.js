@@ -118,12 +118,16 @@ export default class Cell extends Component {
   //}
 
 
-  spend = () => {
-    this.props.spend({
-      x: this.props.x,
-      y: this.props.y,
-    })
-    this.setState({ editing : false })
+  // should this be hit?
+  spend = (value) => {
+    console.log(value)
+    this.props.spend(
+      {
+        x: this.props.x,
+        y: this.props.y,
+      }
+    )
+    this.setState({ editing: false })
   }
 
   // TODO: need this to update the values?

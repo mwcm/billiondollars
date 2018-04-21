@@ -10,7 +10,7 @@ const Row = (props) => {
   for (let x = 0; props.x > x; x += 1){
     cells.push(
       <Cell
-        key={'${x}-${y}'}
+        key={`${x}-${y}`}
         y={y}
         x={x}
         spend={props.spend}

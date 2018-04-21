@@ -11,14 +11,19 @@ export default class Table extends React.Component {
 
     // TODO: how to load array from file here using react virtualized
     this.state = {
-      data: {},
+      data: {0:{0:'a',1:'b',2:'c',3:'d',4:'e'},
+             1:{0:'a',1:'b',2:'c',3:'d',4:'e'}},
     }
   }
 
+  //https://medium.freecodecamp.org/reactjs-pass-parameters-to-event-handlers-ca1f5c422b9
   spend = (x , y) => (e) => {
+    console.log('aeiou')
+    console.log(x,y)
     const modifiedData = Object.assign({}, this.state.data)
-    if(!modifiedData[y]) return; // don't want to add rows
-    modifiedData[y][x] = "" // or add padding?
+    if (!modifiedData[y]) modifiedData[y] = {}
+    modifiedData[y][x] = "jjj" // or add padding?
+    console.log(modifiedData)
     this.setState({data : modifiedData})
   }
 
@@ -52,14 +57,15 @@ export default class Table extends React.Component {
     }
     return (
       <div>
-        <button onClick={this.spend('0, 0')}> BUTTON </button>
+        <button onClick={this.spend(1, 1)}> BUTTON </button>
         {rows}
       </div>
     )
   }
 }
-        //<button onClick={(e) => this.spend(e, '{0,0}')}></button>
-        //<button onClick={this.spend.bind(this, '{0,0}')}></button>
+        // https://medium.freecodecamp.org/reactjs-pass-parameters-to-event-handlers-ca1f5c422b9
+        // <button onClick={(e) => this.spend(e, '{0,0}')}></button>
+        // <button onClick={this.spend.bind(this, '{0,0}')}></button>
 
 Table.propTypes = {
   x: PropTypes.number.isRequired,
