@@ -8,35 +8,57 @@ export default class Table extends React.Component {
   constructor(props) {
     super(props)
 
+    this.handleClick = this.handleClick.bind(this);
 
     // TODO: how to load array from file here using react virtualized
     this.state = {
       data: {0:{0:'a',1:'b',2:'c',3:'d',4:'e'},
              1:{0:'a',1:'b',2:'c',3:'d',4:'e'}},
+      spent: []
     }
   }
 
   //https://medium.freecodecamp.org/reactjs-pass-parameters-to-event-handlers-ca1f5c422b9
-  spend = (x , y) => (e) => {
-    console.log('aeiou')
-    console.log(x,y)
+  handleClick = (e) => {
+    e.preventDefault()
+    const min = 1;
+    const max = 20000;
+    let y = 0;
+    let x = 0;
+    const cellNumber = 0;
+
+    while (true){
+      const cellNumber = min + Math.random() * (max - min);
+
+      // TODO: how to load data array in first, REACT VIRTUALIZE
+
+      if(this.state.spent[cellNumber] !== 1){
+        let current = this.state.spent[cellNumber]
+        this.setState({spent: current});
+        break;
+      }
+    }
+
+    y = Math.ceil(cellNumber / 5);
+    x = cellNumber % 5;
+
+    //this.setState({ random: this.state.random + rand });
     const modifiedData = Object.assign({}, this.state.data)
     if (!modifiedData[y]) modifiedData[y] = {}
     modifiedData[y][x] = "jjj" // or add padding?
-    console.log(modifiedData)
     this.setState({data : modifiedData})
-  }
-
-  handleChangedCell = ({ x, y }, value) => {
-    const modifiedData = Object.assign({}, this.state.data)
-    if (!modifiedData[y]) modifiedData[y] = {}
-    modifiedData[y][x] = value
-    this.setState({ data: modifiedData })
   }
 
   updateCells = () => {
     this.forceUpdate()
   }
+
+  //handleChangedCell = ({ x, y }, value) => {
+    //const modifiedData = Object.assign({}, this.state.data)
+    //if (!modifiedData[y]) modifiedData[y] = {}
+    //modifiedData[y][x] = value
+    //this.setState({ data: modifiedData })
+  //}
 
   render() {
     const rows = []
@@ -45,8 +67,7 @@ export default class Table extends React.Component {
       const rowData = this.state.data[y] || {}
       rows.push(
         <Row
-          spend = {this.spend}
-          handleChangedCell={this.handleChangedCell}
+          handleChangedCell={this.handleClick}
           updateCells={this.updateCells}
           key={y}
           y={y}
@@ -57,7 +78,7 @@ export default class Table extends React.Component {
     }
     return (
       <div>
-        <button onClick={this.spend(1, 1)}> BUTTON </button>
+        <button onClick={this.handleClick}> BUTTON </button>
         {rows}
       </div>
     )

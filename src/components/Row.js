@@ -28,7 +28,6 @@ const Row = (props) => {
 }
 
 Row.propTypes = {
-  spend: PropTypes.func.isRequired,
   handleChangedCell : PropTypes.func.isRequired,
   updateCells: PropTypes.func.isRequired,
   x: PropTypes.number.isRequired,
