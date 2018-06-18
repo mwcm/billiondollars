@@ -64,6 +64,8 @@ export default class Table extends React.Component {
     const rows = []
 
     for (let y = 0; y < this.props.y + 1; y += 1) {
+
+    //{this.props.item.map( item => )} <-- something like this is more elegant
       const rowData = this.state.data[y] || {}
       rows.push(
         <Row
