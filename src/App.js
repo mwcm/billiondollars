@@ -9,16 +9,15 @@ import './App.css';
 class App extends Component {
   constructor(props){
     super(props);
-    // how to load data properly
     this.state = {
-      data : [[1,2,3,4]]
+      data : []
     }
-    //console.log(this.handsontableData);
+
     this.updateData = this.updateData.bind(this);
   }
 
   componentDidMount() {
-    var csvFile = require('./money_2.csv')
+    var csvFile = require('./money.csv')
     Papa.parse(csvFile, {
       header: false,
       download: true,
@@ -28,11 +27,12 @@ class App extends Component {
   }
 
   updateData(result) {
-    console.log(this.state.data)
+    //console.log(this.state.data)
     const data = result.data;
     this.setState({data}); // ES syntax: this.setState({data})
-    console.log(this.state.data)
-    //this.forceUpdate()
+    console.log(window.devicePixelRatio);
+    console.log(window.innerWidth)
+    //console.log(this.state.data)
   }
 
   render() {
@@ -45,15 +45,14 @@ class App extends Component {
         //<p className="App-intro">
           //To get started, edit <code>src/App.js</code> and save to reload.
         //</p>
-          <div id="App" className="App" style={{width:'100%'}}>
-            <HotTable
-              data={this.state.data}
-              colHeaders={false}
-              rowHeaders={false}
-              width="600"
-              height="300"
-              strechH="all"/>
-          </div>
+      <HotTable
+        stretchH="all"
+        disableVisualSelection={true}
+        readOnly={true}
+        data={this.state.data}
+        colHeaders={false}
+        rowHeaders={false}
+        strechH="all"/>
       //</div>
     );
   }
