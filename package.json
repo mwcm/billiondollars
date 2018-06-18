@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "papaparse": "^4.5.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-handsontable": "^0.3.1",

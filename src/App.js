@@ -1,16 +1,38 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-//import Table from './components/Table.js'
 import HotTable from 'react-handsontable'
-import data from  './money.js';
+import Papa from 'papaparse'
 import logo from './logo.svg';
 import './App.css';
+
 
 class App extends Component {
   constructor(props){
     super(props);
-    this.handsontableData = data;
-    console.log(this.handsontableData);
+    // how to load data properly
+    this.state = {
+      data : [[1,2,3,4]]
+    }
+    //console.log(this.handsontableData);
+    this.updateData = this.updateData.bind(this);
+  }
+
+  componentDidMount() {
+    var csvFile = require('./money_2.csv')
+    Papa.parse(csvFile, {
+      header: false,
+      download: true,
+      skipEmptyLines:true,
+      complete: this.updateData
+    });
+  }
+
+  updateData(result) {
+    console.log(this.state.data)
+    const data = result.data;
+    this.setState({data}); // ES syntax: this.setState({data})
+    console.log(this.state.data)
+    //this.forceUpdate()
   }
 
   render() {
@@ -25,7 +47,7 @@ class App extends Component {
         //</p>
           <div id="App" className="App" style={{width:'100%'}}>
             <HotTable
-              data={this.handsontableData}
+              data={this.state.data}
               colHeaders={false}
               rowHeaders={false}
               width="600"
