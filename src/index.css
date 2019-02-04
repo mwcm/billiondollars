@@ -38,27 +38,27 @@ body {
 .ht_clone_top th {
   border-top: 1px solid #FFF;
   border-right: 1px solid #FFF;
-  border-bottom: 1px solid #FFF;
+  /*border-bottom: 1px solid #FFF;*/
 }
 
 /* Left */
 .ht_clone_top_left_corner th {
-  border-right: 1px solid #FFF;
+  /*border-right: 1px solid #FFF;*/
 }
 
 /* Corner */
 /* top left */
 .ht_clone_top_left_corner th {
-  border: 1px solid #FFF;
+  /*border: 1px solid #FFF;*/
 }
 
 /* Rows */
 /* Bottom */
 .ht_master tr > td {
-  border-bottom: 1px solid #FFF;
+  /*border-bottom: 1px solid #FFF;*/
 }
 
 /* Right */
 .ht_master tr > td {
-  border-right: 1px solid #FFF;
+  /*border-right: 1px solid #FFF;*/
 }
